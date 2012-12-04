@@ -13,7 +13,7 @@ def numpy2tex(array,
     """convert numpy 2D array to tex table
     If filename is specified, the tex table will be written to that file; otherwise the string is returned."""
 
-    # convert any 2D iterable to np.array
+    # convert any 2D iterable to np.array. Array content needs to be convertable to string
     array = np.array(array)
     m, n = array.shape
     # add titles for Columns, Rows and upper left cell, if given/neccessary
@@ -33,8 +33,8 @@ def numpy2tex(array,
         "\\begin{tabular}{" + columns + "}\n\\hline\n"
     for line in array:
         for el in line[:-1]:
-            texString += el + " & "
-        texString += line[-1] + " \\\\\\hline\n"
+            texString += str(el) + " & "
+        texString += str(line[-1]) + " \\\\\\hline\n"
     texString += \
         "\\end{tabular}\n" + \
         "\\caption{" + caption + "}\n" + \
