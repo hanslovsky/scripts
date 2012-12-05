@@ -16,6 +16,8 @@ def numpy2tex(array,
     # convert any 2D iterable to np.array. Array content needs to be convertable to string
     array = np.array(array)
     m, n = array.shape
+    # todo: if array is 3D (e.g. when input array is 2D array of tuples), convert third dimension to
+    # string and reshape to 2D
     # add titles for Columns, Rows and upper left cell, if given/neccessary
     cTitles = False
     if columnTitles:
