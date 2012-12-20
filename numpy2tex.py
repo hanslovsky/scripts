@@ -31,6 +31,7 @@ def numpy2tex(array,
     if rowTitles:
         if cTitles:
             rowTitles = np.append([upperLeft], rowTitles)[:, np.newaxis]
+        columns = '|c' + columns
         array = np.append(rowTitles, array, axis = 1)
 
     # convert to tex string
