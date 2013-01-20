@@ -14,7 +14,7 @@ export PATH=$HOME/local/pi-x-compile/bin:$HOME/x-tools-arm/{arm-unknown-linux-gn
 export C_INCLUDE_PATH=$HOME/local/pi-x-compile/include
 export CPLUS_INCLUDE_PATH=$HOME/local/pi-x-compile/include
 
-CXX=arm-unknown-linux-gnueabi-g++ CC=arm-unknown-linux-gnueabi-gcc ./configure --prefix=/home/phil/local/pi-x-compile --host=amd64-linux --build=arm
+CXX=arm-unknown-linux-gnueabi-g++ CC=arm-unknown-linux-gnueabi-gcc ./configure --prefix=/home/phil/local/pi-x-compile --host=amd64 --build=arm
 
 export LD_LIBRARY_PATH=$OLD_LD
 export LIBRARY_PATH=$OLD_LIBRARY

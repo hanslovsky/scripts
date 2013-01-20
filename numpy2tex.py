@@ -10,7 +10,8 @@ def numpy2tex(array,
               columnTitles = [],
               rowTitles = [],
               upperLeft = '',
-              dataType = '|S100'):
+              dataType = '|S100',
+              option = '[h!]'):
     """convert numpy 2D array to tex table
     If filename is specified, the tex table will be written to that file; otherwise the string is returned."""
 
@@ -36,7 +37,7 @@ def numpy2tex(array,
 
     # convert to tex string
     texString = \
-        "\\begin{table}[h!]\n" + \
+        "\\begin{table}" + option + "\n" + \
         "\\centering\n" + \
         "\\begin{tabular}{" + columns + "}\n\\hline\n"
     for line in array:
