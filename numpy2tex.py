@@ -9,12 +9,17 @@ def numpy2tex(array,
               columns = '',
               columnTitles = [],
               rowTitles = [],
-              upperLeft = ''):
+              upperLeft = '',
+              dataType = '|S100'):
     """convert numpy 2D array to tex table
     If filename is specified, the tex table will be written to that file; otherwise the string is returned."""
 
     # convert any 2D iterable to np.array. Array content needs to be convertable to string
-    array = np.array(array)
+    array = np.array(array, dtype=dataType)
+    if len(array.shape) != 2:
+        print "Works only for 2D Arrays. If you want to print an array of iterables (such as array of tuples)" + \
+            " to table, please convert it to an array of strings first."
+        raise Exception()
     m, n = array.shape
     # todo: if array is 3D (e.g. when input array is 2D array of tuples), convert third dimension to
     # string and reshape to 2D
@@ -51,9 +56,10 @@ def numpy2tex(array,
     
     
 if __name__ == "__main__":
-    arr = np.zeros((3,3))
+    arr = np.zeros((3,3))+1.0/3.0
     filename = ""
     print numpy2tex(arr, filename, columnTitles = ['c1', 'c2', 'c3'],
                     rowTitles = ['r1', 'r2', 'r3'], upperLeft = 'ul',
                     caption = "blablacaption", label = "label1",
-                    columns = '|c|c|c|c|')
+                    columns = '|c|c|c|c|', dataType = '|S5')
+    
