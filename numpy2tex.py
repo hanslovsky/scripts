@@ -48,7 +48,7 @@ def numpy2tex(array,
         "\\end{tabular}\n" + \
         "\\caption{" + caption + "}\n" + \
         "\\label{tab:" + label + "}\n" + \
-        "\\end{table}"
+        "\\end{table}\n"
     # write to file if specified and return string
     if filename:
         with open(filename, 'w') as f:
