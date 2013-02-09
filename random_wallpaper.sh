@@ -25,26 +25,24 @@ sleep_time="$2s"
 
 imgs=()
 for f in $files; do
-    python check_if_image.py -f $f
+    python $HOME/git/scripts/check_if_image.py -f $f
     if [[ "$?" -eq "0" ]]; then
 	imgs+=("$f")
     fi
 done
 
-set -e
+
 n_images=${#imgs[@]}
 
 set -e
 
 while [[ "1" -eq "1" ]]; do
-    let "index = $RANDOM % $n_images"
+    index=`shuf -i1-$n_images -n1`
     img=${imgs[$index]}
-    convert $img $HOME/wallpaper.bmp
+    # ln -f -s $img $HOME/.wallpaper
     width=`identify -format "%[fx:w]" $img`
     height=`identify -format "%[fx:h]" $img`
-
     
     gsettings set org.gnome.desktop.background picture-uri file:///$img
-    echo "new wallpaper: $img"
     sleep $sleep_time
 done
