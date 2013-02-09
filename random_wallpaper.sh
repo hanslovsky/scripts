@@ -44,5 +44,6 @@ while [[ "1" -eq "1" ]]; do
     height=`identify -format "%[fx:h]" $img`
     
     gsettings set org.gnome.desktop.background picture-uri file:///$img
+    echo $img
     sleep $sleep_time
 done
