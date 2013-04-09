@@ -1,4 +1,2 @@
 xpra start :77
-export DISPLAY=:77
-xterm &
-xterm &
+DISPLAY=":77" xterm &
