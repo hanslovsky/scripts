@@ -35,7 +35,7 @@ def get_closest_string_from_dict_html_specific(s, d):
 def preprocess(fn):
     s = open(fn, 'r').read()
     s = s.replace('</font>', '')
-    s = s.replace('<br>', r'\n')
+    s = s.replace('<br>', r'\033[0m\n')
     s = s.replace('black', '#000000')
     s = s.replace('white', '#ffffff')
     return s
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     
     
     for key, val in new_dict.iteritems():
-        s = s.replace('<font color=%s>' % key, r'\e[01;38;05;%sm' % val)
+        s = s.replace('<font color=%s>' % key, r'\e[48;05;%sm\e[01;38;05;%sm' % (val, val))
     s = s + r'\033[0m'
     # print create_colortable_from_file('term_colors_html.dat')
     print s
