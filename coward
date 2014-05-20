@@ -6,7 +6,7 @@
 mkdir -p "$HOME/local/aur"
 cd "$_" && cower -d "$1"
 builddir="$_"
-cd "$builddir" && ec PKGBUILD
+cd "$builddir" && emacsclient -c PKGBUILD
 
 makepkg -si && cd - &>/dev/null
 
