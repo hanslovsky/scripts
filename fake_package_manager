@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -e
+
+addLinks() {
+    # param:
+    # SOURCE_LIST_FILE
+    # TARGET_DIRECTORY
+    # MANAGER_DIRECTORY
+    # ROOT_DIRECTORY
+    if [ "$#" -ne "4" ]; then
+        echo "call like addLinks SOURCE_LIST_FILE TARGET_DIRECTORY MANAGER_DIRECTORY ROOT_DIRECTORY (input was: addLinks $@)"
+        return 1
+    fi
+
+    SOURCE_LIST_FILE="$1"
+    TARGET_DIRECTORY="$2"
+    MANAGER_DIRECTORY="$3"
+    ROOT_DIRECTORY="$4"
+
+    PYTHON_CMD="import os.path; print os.path.relpath('$ROOT_DIRECTORY', '$TARGET_DIRECTORY')"
+    SOURCE_DIRECTORY_RELATIVE_TO_TARGET="$(python -c "$PYTHON_CMD")"
+
+
+    while read line; do
+        RELATIVE_SOURCE="${line#$ROOT_DIRECTORY}" # remove $ROOT_DIRECTORY (from the left)
+        if [[ "$ROOT_DIRECTORY$RELATIVE_SOURCE" != "$line" ]]; then
+            echo "$line not in $ROOT_DIRECTORY"
+            return 3
+        fi
+        TARGET_FILE="${TARGET_DIRECTORY%/}$RELATIVE_SOURCE" # create target file path
+        if [[ -f $TARGET_FILE ]]; then
+            echo "$TARGET_FILE exists. Please unlink first or delete manually."
+            return 2
+        fi
+        SOURCE_RELATIVE_TO_TARGET="${SOURCE_DIRECTORY_RELATIVE_TO_TARGET%/}$RELATIVE_SOURCE"
+        ln -s "$SOURCE_RELATIVE_TO_TARGET" "$TARGET_FILE"
+    done < "$SOURCE_LIST_FILE"
+    
+    return 0
+}
+
+removeLinks() {
+
+    return 0
+}
+
+
+addLinks "/groups/saalfeld/home/hanslovskyp/git/scripts/bla.test" $PWD/bla.test.dir/ blua "$PWD"
