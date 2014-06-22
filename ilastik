@@ -1,0 +1,13 @@
+CWD=$PWD
+
+
+DEFAULT_ILASTIK_DIR= $( find $HOME/local/share -maxdepth 1 -type d -name 'ilasitk*' | sort -n | tail -n1 )
+
+ILASTIK_DIR="${ILASTIK_DIR:-$DEFAULT_ILASTIK_DIR}"
+
+
+cd $ILASTIK_DIR
+EXIT_CODE=exec ./run_ilastik.sh
+
+cd $CWD
+exit $EXIT_CODE
