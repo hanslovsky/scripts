@@ -1,9 +1,0 @@
-#!/bin/bash
-
-if [ ! -z $BUILDEM_DIR ]; then
-    export PATH=$BUILDEM_DIR/bin:$PATH
-    export LD_LIBRARY_PATH=$BUILDEM_DIR/lib:$LD_LIBRARY_PATH
-fi
-
-dvid $@
-
