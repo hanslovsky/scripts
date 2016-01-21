@@ -9,7 +9,7 @@ cd $LOG_DIR
 
 for fn in h*.out; do
     HN=`echo $fn | grep -Eo '^[^\.]+'`
-    ssh -x $HN '/sbin/ip addr | grep "10.38.104.35" && hostname'
+    ssh -x $HN '/sbin/ip addr | grep "$IP_ADDR" && hostname'
 done
 
 cd $CWD
