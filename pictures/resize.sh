@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+shopt -s nocaseglob
+
 FACTOR=${FACTOR:-25%}
 
 mkdir -p ${FACTOR}

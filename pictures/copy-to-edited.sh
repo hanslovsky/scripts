@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+shopt -s nocaseglob
+
 EDITED=edited
 mkdir -p $EDITED
 
