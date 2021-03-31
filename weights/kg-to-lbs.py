@@ -7,7 +7,7 @@ def to_lbs(weight_in_kg):
 
 _weights_in_kg = (0.125, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5)
 _weights_in_lbs = tuple(map(to_lbs, _weights_in_kg))
-target_weights_in_lbs= (2.5, 5.0)
+target_weights_in_lbs= (2.5, 5.0, 7.5)
 
 # brute force solution (2**7! = 128 distinct solutions)
 def find_best_combination(target_weight_in_lbs):
