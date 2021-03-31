@@ -1,0 +1,3 @@
+copy-to-edited.sh
+FACTOR=25% resize.sh
+FACTOR=50% resize.sh
