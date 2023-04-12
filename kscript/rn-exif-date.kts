@@ -33,7 +33,7 @@ class RenameArgs : Callable<Int> {
 
     private val tagDateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss")
 
-    @CommandLine.Option(names = ["--dry-run", "-d"], required = false, descriptino = ["Do not do anything. Use in conjunction with the `--verbose' flag to print what would happen."])
+    @CommandLine.Option(names = ["--dry-run", "-d"], required = false, description = ["Do not do anything. Use in conjunction with the `--verbose' flag to print what would happen."])
     private var dryRun: Boolean = false
 
     @CommandLine.Parameters(arity = "*", description = ["List of image files to be renamed"])
