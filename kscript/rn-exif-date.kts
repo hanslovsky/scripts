@@ -1,8 +1,11 @@
 #!/usr/bin/env kscript
 
-@file:DependsOn("com.drewnoakes:metadata-extractor:2.13.0")
-@file:DependsOn("org.apache.commons:commons-lang3:3.10")
-@file:DependsOn("info.picocli:picocli:4.2.0")
+@file:Repository("https://jitpack.io")
+// @file:DependsOn("com.drewnoakes:metadata-extractor:2.19.0")
+// Use code from https://github.com/drewnoakes/metadata-extractor/pull/656 until merged
+@file:DependsOn("com.github.nosnhojbob:metadata-extractor:main-SNAPSHOT")
+@file:DependsOn("org.apache.commons:commons-lang3:3.14.0")
+@file:DependsOn("info.picocli:picocli:4.7.5")
 
 import java.io.File
 import java.nio.file.CopyOption
@@ -83,12 +86,19 @@ class RenameArgs : Callable<Int> {
                         .first()
                         .description
                         .let { tagDateFormat.parse(it) }
+
             } catch(exception: Exception) {
                 filesWithoutMetaData[it.key] = exception
             }
         }
 
         filesWithoutMetaData.takeIf { it.isNotEmpty() }?.let {
+            it.forEach { e ->
+                println("Exception for ${e.key}: ${e.value.message}")
+                e.value.printStackTrace()
+                println()
+                println()
+            }
             throw Exception("Unable to extract meta data from files:\n${it.entries.map{ "`${it.key}': ${it.value.message}" }.joinToString("\n")}")
         }
 
